@@ -4,9 +4,13 @@ import com.back.accesum.modelo.User;
 import com.back.accesum.modelo.tbl_coordinacions;
 import com.back.accesum.modelo.tbl_fichas;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface IFichasService {
         public List<tbl_fichas> findAll();
+        	
+        public Page<tbl_fichas> findAll(Pageable pageable);
 	
 	public tbl_fichas findById(Long id);
 	
