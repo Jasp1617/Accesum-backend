@@ -1,9 +1,10 @@
 package com.back.accesum.services;
 
+import java.util.List;
 import com.back.accesum.modelo.dao.IFichasDao;
 import com.back.accesum.modelo.tbl_coordinacions;
 import com.back.accesum.modelo.tbl_fichas;
-import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -42,9 +43,6 @@ public class FichasServiceImpl implements IFichasService{
 
     @Override
     public Page<tbl_fichas> findAll(Pageable pageable) {
-       return fichasDao.findAll(pageable);
+        return fichasDao.findAll(pageable);
     }
-
-
-    
 }

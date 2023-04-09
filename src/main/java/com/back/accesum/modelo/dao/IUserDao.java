@@ -2,7 +2,6 @@ package com.back.accesum.modelo.dao;
 
 import com.back.accesum.modelo.User;
 import com.back.accesum.modelo.tbl_fichas;
-import com.back.accesum.modelo.tbl_coordinacions;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;

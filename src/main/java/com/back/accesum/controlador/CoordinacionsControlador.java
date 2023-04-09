@@ -1,9 +1,7 @@
 package com.back.accesum.controlador;
 
-import com.back.accesum.modelo.User;
-import com.back.accesum.services.IFichasService;
-import com.back.accesum.services.IUploadFileService;
-import com.back.accesum.services.IUserService;
+import com.back.accesum.modelo.tbl_coordinacions;
+import com.back.accesum.services.ICoordinacionsService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,8 +9,8 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,41 +25,42 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//this is the user controller with its endpoints
+
+// @author Jorge Silva Helmunt Urueta Jordan Hernandez Equipo Back-end
+
+// This is a api controller from table Coordinacions
 @RestController
 @RequestMapping("/accesum")
 @CrossOrigin(origins = "*")
-public class UserControlador {
-
+public class CoordinacionsControlador {
         @Autowired
-        private IUserService userService;
-        private IFichasService fichasService;
+        private ICoordinacionsService coordinacionsService;
 
-        @Autowired
-        private IUploadFileService uploadService;
+       //@Autowired
+        //private IUploadFileService uploadService;
 
         // This is for get all datas of tbl user
-        @GetMapping("/usuarios")
-        public List<User> findAll() {
-                return userService.findAll();
+        @GetMapping("/coordinacion")
+        public List<tbl_coordinacions> findAll() {
+                return coordinacionsService.findAll();
         }
 
         // this is for pagination
-        @GetMapping("/usuarios/page/{page}")
-        public Page<User> index(@PathVariable Integer page) {
-                Pageable pageable = PageRequest.of(page, 4);
-                return userService.findAll(pageable);
+        @GetMapping("/coordinacions/page/{page}")
+        public Page<tbl_coordinacions> index(@PathVariable Integer page) {
+                Pageable pageable = PageRequest.of(page, 4) ;
+                return coordinacionsService.findAll(pageable);
         }
 
         // this is for search by id
-        @GetMapping("/usuarios/{id}")
+        @GetMapping("/coordinacions/{id}")
         public ResponseEntity<?> show(@PathVariable Long id) {
 
-                User user = null;
+                tbl_coordinacions coordinacions = null;
                 Map<String, Object> response = new HashMap<>();
 
                 try {
-                        user = userService.findById(id);
+                        coordinacions = coordinacionsService.findById(id);
                 } catch (DataAccessException e) {
                         response.put("mensaje", "Error al realizar la consulta en la base de datos");
                         response.put("error",
@@ -69,20 +68,20 @@ public class UserControlador {
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
                 }
 
-                if (user == null) {
+                if (coordinacions == null) {
                         response.put("mensaje", "El usuario ID: "
                                         .concat(id.toString().concat(" no existe en la base de datos!")));
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
                 }
 
-                return new ResponseEntity<User>(user, HttpStatus.OK);
+                return new ResponseEntity<tbl_coordinacions>(coordinacions, HttpStatus.OK);
         }
 
         // This is for create new user
-        @PostMapping("/usuarios")
-        public ResponseEntity<?> create(@Valid @RequestBody User user, BindingResult result) {
+        @PostMapping("/coordinacions")
+        public ResponseEntity<?> create(@Valid @RequestBody tbl_coordinacions coordinacions, BindingResult result) {
 
-                User userNew = null;
+                tbl_coordinacions coordinacionsNew = null;
                 Map<String, Object> response = new HashMap<>();
 
                 if (result.hasErrors()) {
@@ -97,26 +96,27 @@ public class UserControlador {
                 }
 
                 try {
-                        userNew = userService.save(user);
+                        coordinacionsNew = coordinacionsService.save(coordinacions);
                 } catch (DataAccessException e) {
-                        response.put("mensaje", "Error al realizar el insert en la base de datos");
+                        response.put("mensaje", "Error al realizar el insertar en la base de datos");
                         response.put("error",
                                         e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
                 }
 
                 response.put("mensaje", "El usuario ha sido creado con éxito!");
-                response.put("usuario", userNew);
+                response.put("usuario", coordinacionsNew);
                 return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
         }
 
         // This is for Update a user
-        @PutMapping("/usuarios/{id}")
-        public ResponseEntity<?> update(@Valid @RequestBody User user, BindingResult result, @PathVariable Long id) {
+        @PutMapping("/coordinacions/{id}")
+        public ResponseEntity<?> update(@Valid @RequestBody tbl_coordinacions coordinacions, BindingResult result,
+                        @PathVariable Long id) {
 
-                User userActual = userService.findById(id);
+                tbl_coordinacions coordinacionsActual = coordinacionsService.findById(id);
 
-                User userUpdated = null;
+                tbl_coordinacions coordinacionsUpdated = null;
 
                 Map<String, Object> response = new HashMap<>();
 
@@ -131,7 +131,7 @@ public class UserControlador {
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
                 }
 
-                if (userActual == null) {
+                if (coordinacionsActual == null) {
                         response.put("mensaje", "Error: no se pudo editar, el cliente ID: "
                                         .concat(id.toString().concat(" no existe en la base de datos!")));
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
@@ -139,14 +139,12 @@ public class UserControlador {
 
                 try {
 
-                        userActual.setNombre(user.getNombre());
-                        userActual.setDocument(user.getDocument());
-                        userActual.setEmail(user.getEmail());
-                        userActual.setPassword(user.getPassword());
-                        userActual.setTbl_fichas(user.getTbl_fichas());
-                        userActual.setDetalles(user.getDetalles());
+                        coordinacionsActual.setTbl_coordinacions_codigo(coordinacions.getTbl_coordinacions_codigo());
+                        coordinacionsActual.setTbl_coordinacions_nombre(coordinacions.getTbl_coordinacions_nombre());
+                        coordinacionsActual.setTbl_coordinacions_coordinador(coordinacions.getTbl_coordinacions_coordinador());
+                        coordinacionsActual.setTbl_coordinacions_tbl_centros_id(coordinacions.getTbl_coordinacions_tbl_centros_id());
 
-                        userUpdated = userService.save(userActual);
+                        coordinacionsUpdated = coordinacionsService.save(coordinacionsActual);
 
                 } catch (DataAccessException e) {
                         response.put("mensaje", "Error al actualizar el usuario en la base de datos");
@@ -155,43 +153,35 @@ public class UserControlador {
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
                 }
 
-                response.put("mensaje", "El usuario ha sido actualizado con éxito!");
-                response.put("usuario", userUpdated);
+                response.put("mensaje", "Coordinacion ha sido actualizado con éxito!");
+                response.put("usuario", coordinacionsUpdated);
 
                 return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
         }
 
         // Metodo para eliminar usuarios
-        @DeleteMapping("/usuarios/{id}")
+        @DeleteMapping("/coordinacions/{id}")
         public ResponseEntity<?> delete(@PathVariable Long id) {
 
                 Map<String, Object> response = new HashMap<>();
 
                 try {
                         // se puede utulizar o implementar para codigo QR
-                        User user = userService.findById(id);
+                        tbl_coordinacions coordinacions = coordinacionsService.findById(id);
                         // String nombreFotoAnterior = user.get();
 
                         // uploadService.eliminar(nombreFotoAnterior);
 
-                        userService.delete(id);
+                        coordinacionsService.delete(id);
                 } catch (DataAccessException e) {
-                        response.put("mensaje", "Error al eliminar el usuario de la base de datos");
+                        response.put("mensaje", "Error al eliminar la ficha de la base de datos");
                         response.put("error",
                                         e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
                 }
 
-                response.put("mensaje", "El usuario ha sido eliminado con éxito!");
+                response.put("mensaje", "La coordinacions ha sido eliminado con éxito!");
 
                 return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
         }
-        /*
-         * // this is for get all datas of tbl_fichas
-         * 
-         * @GetMapping("/usuarios/fichas")
-         * public List<tbl_fichas> listartbl_fichas(){
-         * return fichasService.findAll();
-         * }
-         */
 }

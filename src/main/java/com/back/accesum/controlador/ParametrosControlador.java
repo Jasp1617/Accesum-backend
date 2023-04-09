@@ -1,14 +1,12 @@
 package com.back.accesum.controlador;
 
-import com.back.accesum.modelo.User;
-import com.back.accesum.services.IFichasService;
-import com.back.accesum.services.IUploadFileService;
-import com.back.accesum.services.IUserService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
@@ -26,42 +24,36 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.back.accesum.modelo.Parametros;
+import com.back.accesum.services.IParametrosService;
 
-//this is the user controller with its endpoints
 @RestController
 @RequestMapping("/accesum")
 @CrossOrigin(origins = "*")
-public class UserControlador {
-
+public class ParametrosControlador {
         @Autowired
-        private IUserService userService;
-        private IFichasService fichasService;
+        private IParametrosService parametrosService;
 
-        @Autowired
-        private IUploadFileService uploadService;
+        // @Autowired
+        // private IUploadFileService uploadService;
 
         // This is for get all datas of tbl user
-        @GetMapping("/usuarios")
-        public List<User> findAll() {
-                return userService.findAll();
+        @GetMapping("/parametros")
+        public List<Parametros> findAll() {
+                return parametrosService.findAll();
         }
 
         // this is for pagination
-        @GetMapping("/usuarios/page/{page}")
-        public Page<User> index(@PathVariable Integer page) {
-                Pageable pageable = PageRequest.of(page, 4);
-                return userService.findAll(pageable);
-        }
 
         // this is for search by id
-        @GetMapping("/usuarios/{id}")
+        @GetMapping("/parametros/{id}")
         public ResponseEntity<?> show(@PathVariable Long id) {
 
-                User user = null;
+                Parametros parametros = null;
                 Map<String, Object> response = new HashMap<>();
 
                 try {
-                        user = userService.findById(id);
+                        parametros = parametrosService.findById(id);
                 } catch (DataAccessException e) {
                         response.put("mensaje", "Error al realizar la consulta en la base de datos");
                         response.put("error",
@@ -69,20 +61,20 @@ public class UserControlador {
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
                 }
 
-                if (user == null) {
-                        response.put("mensaje", "El usuario ID: "
+                if (parametros == null) {
+                        response.put("mensaje", "El centro ID: "
                                         .concat(id.toString().concat(" no existe en la base de datos!")));
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
                 }
 
-                return new ResponseEntity<User>(user, HttpStatus.OK);
+                return new ResponseEntity<Parametros>(parametros, HttpStatus.OK);
         }
 
         // This is for create new user
-        @PostMapping("/usuarios")
-        public ResponseEntity<?> create(@Valid @RequestBody User user, BindingResult result) {
+        @PostMapping("/parametros")
+        public ResponseEntity<?> create(@Valid @RequestBody Parametros parametros, BindingResult result) {
 
-                User userNew = null;
+                Parametros parametrosNew = null;
                 Map<String, Object> response = new HashMap<>();
 
                 if (result.hasErrors()) {
@@ -97,26 +89,27 @@ public class UserControlador {
                 }
 
                 try {
-                        userNew = userService.save(user);
+                        parametrosNew = parametrosService.save(parametros);
                 } catch (DataAccessException e) {
-                        response.put("mensaje", "Error al realizar el insert en la base de datos");
+                        response.put("mensaje", "Error al realizar el insertar en la base de datos");
                         response.put("error",
                                         e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
                 }
 
-                response.put("mensaje", "El usuario ha sido creado con éxito!");
-                response.put("usuario", userNew);
+                response.put("mensaje", "El parametros ha sido creado con éxito!");
+                response.put("usuario", parametrosNew);
                 return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
         }
 
         // This is for Update a user
-        @PutMapping("/usuarios/{id}")
-        public ResponseEntity<?> update(@Valid @RequestBody User user, BindingResult result, @PathVariable Long id) {
+        @PutMapping("/parametros/{id}")
+        public ResponseEntity<?> update(@Valid @RequestBody Parametros parametros, BindingResult result,
+                        @PathVariable Long id) {
 
-                User userActual = userService.findById(id);
+                Parametros parametrosActual = parametrosService.findById(id);
 
-                User userUpdated = null;
+                Parametros parametrosUpdated = null;
 
                 Map<String, Object> response = new HashMap<>();
 
@@ -131,7 +124,7 @@ public class UserControlador {
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
                 }
 
-                if (userActual == null) {
+                if (parametrosActual == null) {
                         response.put("mensaje", "Error: no se pudo editar, el cliente ID: "
                                         .concat(id.toString().concat(" no existe en la base de datos!")));
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
@@ -139,14 +132,11 @@ public class UserControlador {
 
                 try {
 
-                        userActual.setNombre(user.getNombre());
-                        userActual.setDocument(user.getDocument());
-                        userActual.setEmail(user.getEmail());
-                        userActual.setPassword(user.getPassword());
-                        userActual.setTbl_fichas(user.getTbl_fichas());
-                        userActual.setDetalles(user.getDetalles());
+                        parametrosActual.setId_sedes(parametros.getId_sedes());
+                        parametrosActual.setId_user(parametros.getId_user());
+                        parametrosActual.setId_rol(parametros.getId_rol());
 
-                        userUpdated = userService.save(userActual);
+                        parametrosActual = parametrosService.save(parametrosActual);
 
                 } catch (DataAccessException e) {
                         response.put("mensaje", "Error al actualizar el usuario en la base de datos");
@@ -155,43 +145,35 @@ public class UserControlador {
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
                 }
 
-                response.put("mensaje", "El usuario ha sido actualizado con éxito!");
-                response.put("usuario", userUpdated);
+                response.put("mensaje", "parametros ha sido actualizado con éxito!");
+                response.put("usuario", parametrosUpdated);
 
                 return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
         }
 
         // Metodo para eliminar usuarios
-        @DeleteMapping("/usuarios/{id}")
+        @DeleteMapping("/parametros/{id}")
         public ResponseEntity<?> delete(@PathVariable Long id) {
 
                 Map<String, Object> response = new HashMap<>();
 
                 try {
                         // se puede utulizar o implementar para codigo QR
-                        User user = userService.findById(id);
+                        Parametros parametros = parametrosService.findById(id);
                         // String nombreFotoAnterior = user.get();
 
                         // uploadService.eliminar(nombreFotoAnterior);
 
-                        userService.delete(id);
+                        parametrosService.delete(id);
                 } catch (DataAccessException e) {
-                        response.put("mensaje", "Error al eliminar el usuario de la base de datos");
+                        response.put("mensaje", "Error al eliminar el centros de la base de datos");
                         response.put("error",
                                         e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
                 }
 
-                response.put("mensaje", "El usuario ha sido eliminado con éxito!");
+                response.put("mensaje", "el parametros ha sido eliminado con éxito!");
 
                 return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
         }
-        /*
-         * // this is for get all datas of tbl_fichas
-         * 
-         * @GetMapping("/usuarios/fichas")
-         * public List<tbl_fichas> listartbl_fichas(){
-         * return fichasService.findAll();
-         * }
-         */
 }

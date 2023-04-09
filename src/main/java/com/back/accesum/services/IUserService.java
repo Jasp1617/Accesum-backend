@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface IUserService {
     
-        public User findByUsername(String username);
+    public User findByUsername(String username);
 
 	public List<User> findAll();
 	
