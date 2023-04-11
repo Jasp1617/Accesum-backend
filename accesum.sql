@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 09-04-2023 a las 04:32:53
--- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 8.2.0
+-- Servidor: 127.0.0.1:3307
+-- Tiempo de generación: 11-04-2023 a las 18:52:37
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,21 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `accesum`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `movimientos`
+--
+
+CREATE TABLE `movimientos` (
+  `id_mov` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `hora_entrada` time NOT NULL,
+  `hora_salida` time DEFAULT NULL,
+  `sede_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -435,11 +450,20 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`user_id`, `name`, `document`, `email`, `password`, `detalles`, `fichas_id`) VALUES
 (4, 'Jorge', 1047039410, 'jasp@gmail.com', '$2a$10$OCiJdEJmufIYa6XsZh8V5uYRlA8CAuaR..C0qWm0lLYgUyWC0LGNC', 'wef', 55),
 (6, 'Helmunt', 1047036740, 'Helmunt@gmail.com', '1047036740', 'wefxcf', 55),
-(7, 'Jordan', 1047036790, 'Jordan@gmail.com', '1047036790', 'wefxcf', 55);
+(7, 'Jordan', 1047036790, 'Jordan@gmail.com', '1047036790', 'wefxcf', 55),
+(9, 'Juancho', 1047039429, 'jugmail.com', '$2a$10$OCiJdEJmufIYa6XsZh8V5uYRlA8CAuaR..C0qWm0lLYgUyWC0LGNC', 'wef', 55);
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `movimientos`
+--
+ALTER TABLE `movimientos`
+  ADD PRIMARY KEY (`id_mov`),
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `sede_id` (`sede_id`);
 
 --
 -- Indices de la tabla `parametros`
@@ -505,6 +529,12 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `movimientos`
+--
+ALTER TABLE `movimientos`
+  MODIFY `id_mov` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `parametros`
 --
 ALTER TABLE `parametros`
@@ -550,11 +580,18 @@ ALTER TABLE `tbl_sedes`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `movimientos`
+--
+ALTER TABLE `movimientos`
+  ADD CONSTRAINT `movimientos_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`user_id`),
+  ADD CONSTRAINT `movimientos_ibfk_2` FOREIGN KEY (`sede_id`) REFERENCES `tbl_sedes` (`id_sedes`);
 
 --
 -- Filtros para la tabla `parametros`
