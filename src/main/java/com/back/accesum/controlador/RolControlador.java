@@ -1,6 +1,6 @@
 package com.back.accesum.controlador;
 
-import com.back.accesum.modelo.Rol;
+import com.back.accesum.modelo.entity.Rol;
 import com.back.accesum.repositorio.RolRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

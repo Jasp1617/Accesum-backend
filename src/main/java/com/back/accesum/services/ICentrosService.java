@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.P
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
-import com.back.accesum.modelo.Centros;
-import com.back.accesum.modelo.regionales;
+import com.back.accesum.modelo.entity.Centros;
+import com.back.accesum.modelo.entity.regionales;
 
 public interface ICentrosService {
     public List<Centros> findAll();

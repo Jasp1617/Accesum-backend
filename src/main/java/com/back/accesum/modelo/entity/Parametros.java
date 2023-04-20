@@ -1,8 +1,9 @@
-package com.back.accesum.modelo;
+package com.back.accesum.modelo.entity;
 
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.CascadeType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,11 +14,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name = "parametros")
 public class Parametros {
@@ -26,26 +27,20 @@ public class Parametros {
     @Column(name = "id_parametros")
     private Long id;
 
-    @NotNull(message = "Este campo no puede estar vacio")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade={CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "id_sedes")
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private Sedes id_sedes;
 
-    @NotNull(message = "Este campo no puede estar vacio")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade={CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "id_user")
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private User id_user;
 
-    @NotNull(message = "Este campo no puede estar vacio")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade={CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "id_rol")
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private Rol id_rol;
 
-    // Constructor from Centros
-
-    // Getters and Setters from Centros
 
 }

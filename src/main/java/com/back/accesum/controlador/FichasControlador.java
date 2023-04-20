@@ -1,6 +1,6 @@
 package com.back.accesum.controlador;
 
-import com.back.accesum.modelo.tbl_fichas;
+import com.back.accesum.modelo.entity.tbl_fichas;
 import com.back.accesum.services.IFichasService;
 import com.back.accesum.services.IUploadFileService;
 import java.util.HashMap;

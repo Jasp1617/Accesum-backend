@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.back.accesum.modelo.Centros;
+import com.back.accesum.modelo.entity.Centros;
 import com.back.accesum.services.ICentrosService;
 
 // @author Jorge Silva Helmunt Urueta Jordan Hernandez Equipo Back-end

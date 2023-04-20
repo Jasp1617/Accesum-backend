@@ -1,7 +1,7 @@
 package com.back.accesum.services;
 
-import com.back.accesum.modelo.tbl_coordinacions;
-import com.back.accesum.modelo.tbl_fichas;
+import com.back.accesum.modelo.entity.tbl_coordinacions;
+import com.back.accesum.modelo.entity.tbl_fichas;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.data.domain.Page;
 
-import com.back.accesum.modelo.Centros;
-import com.back.accesum.modelo.tbl_coordinacions;
+import com.back.accesum.modelo.entity.Centros;
+import com.back.accesum.modelo.entity.tbl_coordinacions;
 import org.springframework.data.domain.PageRequest;
 
 public interface ICoordinacionsService {

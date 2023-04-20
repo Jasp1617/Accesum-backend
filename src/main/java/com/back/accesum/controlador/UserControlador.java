@@ -1,6 +1,6 @@
 package com.back.accesum.controlador;
 
-import com.back.accesum.modelo.User;
+import com.back.accesum.modelo.entity.User;
 import com.back.accesum.services.IFichasService;
 import com.back.accesum.services.IUploadFileService;
 import com.back.accesum.services.IUserService;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,17 +29,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 //this is the user controller with its endpoints
+@Validated
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/accesum")
 @CrossOrigin(origins = "*")
 public class UserControlador {
 
-        @Autowired
-        private IUserService userService;
-        private IFichasService fichasService;
-
-        @Autowired
-        private IUploadFileService uploadService;
+        private final IUserService userService;
+        private final IFichasService fichasService;
+        private final IUploadFileService uploadService;
 
         // This is for get all datas of tbl user
         @GetMapping("/usuarios")

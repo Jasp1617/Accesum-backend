@@ -1,6 +1,8 @@
-package com.back.accesum.modelo;
+package com.back.accesum.modelo.entity;
 
+import com.back.accesum.modelo.entity.tbl_coordinacions;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -12,15 +14,15 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import javax.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
  * @author Jorge Silva
  */
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name = "tbl_fichas")
 public class tbl_fichas implements Serializable{
@@ -38,45 +40,9 @@ public class tbl_fichas implements Serializable{
     @Column(name = "programa")
     private String programa;
     
-    @NotNull(message="Este campo no puede estar vacio")
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(cascade={CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name="tbl_fichas_tbl_coordinacions")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private tbl_coordinacions tbl_fichas_tbl_coordinacions ;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTbl_fichas_codigo() {
-        return tbl_fichas_codigo;
-    }
-
-    public void setTbl_fichas_codigo(String tbl_fichas_codigo) {
-        this.tbl_fichas_codigo = tbl_fichas_codigo;
-    }
-
-    public String getFichas_grupo() {
-        return fichas_grupo;
-    }
-
-    public void setFichas_grupo(String fichas_grupo) {
-        this.fichas_grupo = fichas_grupo;
-    }
-
-    public String getPrograma() {
-        return programa;
-    }
-
-    public void setPrograma(String programa) {
-        this.programa = programa;
-    }
-
-    
-    private static final long serialVersionUID = 1L;
 
 }
