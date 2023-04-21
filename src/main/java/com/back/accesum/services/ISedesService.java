@@ -3,7 +3,6 @@ package com.back.accesum.services;
 
 import com.back.accesum.modelo.entity.Centros;
 import com.back.accesum.modelo.entity.Parametros;
-import com.back.accesum.modelo.entity.Rol;
 import com.back.accesum.modelo.entity.Sedes;
 import com.back.accesum.modelo.entity.tbl_coordinacions;
 

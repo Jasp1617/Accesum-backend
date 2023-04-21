@@ -168,7 +168,7 @@ public class CentrosControlador {
 
                 try {
                         // se puede utulizar o implementar para codigo QR
-                        Centros coordinacions = centrosService.findById(id);
+                        //Centros coordinacions = centrosService.findById(id);
                         // String nombreFotoAnterior = user.get();
 
                         // uploadService.eliminar(nombreFotoAnterior);

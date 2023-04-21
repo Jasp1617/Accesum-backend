@@ -1,10 +1,7 @@
 package com.back.accesum.controlador;
 
 import com.back.accesum.modelo.entity.Movimientos;
-import com.back.accesum.modelo.entity.User;
 import com.back.accesum.services.IMovimientosService;
-import com.back.accesum.services.ISedesService;
-import com.back.accesum.services.IUserService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,9 +9,6 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -37,8 +31,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class MovimientosControlador {
     
       private final IMovimientosService movServices;
-      private final IUserService userService;
-      private final ISedesService sedesService;
+      //private final IUserService userService;
+      //private final ISedesService sedesService;
       
       
       @GetMapping("/movimiento")
@@ -162,7 +156,7 @@ public class MovimientosControlador {
 
                 try {
                         // se puede utulizar o implementar para codigo QR
-                        Movimientos movimientos = movServices.findById(id);
+                        //Movimientos movimientos = movServices.findById(id);
                         // String nombreFotoAnterior = user.get();
 
                         // uploadService.eliminar(nombreFotoAnterior);

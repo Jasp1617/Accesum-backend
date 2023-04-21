@@ -2,7 +2,6 @@ package com.back.accesum.controlador;
 
 import com.back.accesum.modelo.entity.tbl_fichas;
 import com.back.accesum.services.IFichasService;
-import com.back.accesum.services.IUploadFileService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,8 +37,8 @@ public class FichasControlador {
         @Autowired
         private IFichasService fichasService;
 
-        @Autowired
-        private IUploadFileService uploadService;
+        //@Autowired
+        //private IUploadFileService uploadService;
 
         // This is for get all datas of tbl user
         @GetMapping("/fichas")
@@ -169,7 +168,7 @@ public class FichasControlador {
 
                 try {
                         // se puede utulizar o implementar para codigo QR
-                        tbl_fichas fichas = fichasService.findById(id);
+                        //tbl_fichas fichas = fichasService.findById(id);
                         // String nombreFotoAnterior = user.get();
 
                         // uploadService.eliminar(nombreFotoAnterior);

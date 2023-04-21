@@ -1,8 +1,6 @@
 package com.back.accesum.controlador;
 
 import com.back.accesum.modelo.entity.User;
-import com.back.accesum.services.IFichasService;
-import com.back.accesum.services.IUploadFileService;
 import com.back.accesum.services.IUserService;
 import java.util.HashMap;
 import java.util.List;
@@ -37,8 +35,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserControlador {
 
         private final IUserService userService;
-        private final IFichasService fichasService;
-        private final IUploadFileService uploadService;
+        //private final IFichasService fichasService;
+        //private final IUploadFileService uploadService;
 
         // This is for get all datas of tbl user
         @GetMapping("/usuarios")
@@ -169,7 +167,7 @@ public class UserControlador {
 
                 try {
                         // se puede utulizar o implementar para codigo QR
-                        User user = userService.findById(id);
+                        //User user = userService.findById(id);
                         // String nombreFotoAnterior = user.get();
 
                         // uploadService.eliminar(nombreFotoAnterior);

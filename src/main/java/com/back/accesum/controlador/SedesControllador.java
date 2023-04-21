@@ -1,7 +1,6 @@
 package com.back.accesum.controlador;
 
 import com.back.accesum.modelo.entity.Sedes;
-import com.back.accesum.modelo.entity.User;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;

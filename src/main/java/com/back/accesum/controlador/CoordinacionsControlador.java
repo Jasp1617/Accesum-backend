@@ -167,7 +167,7 @@ public class CoordinacionsControlador {
 
                 try {
                         // se puede utulizar o implementar para codigo QR
-                        tbl_coordinacions coordinacions = coordinacionsService.findById(id);
+                        //tbl_coordinacions coordinacions = coordinacionsService.findById(id);
                         // String nombreFotoAnterior = user.get();
 
                         // uploadService.eliminar(nombreFotoAnterior);
