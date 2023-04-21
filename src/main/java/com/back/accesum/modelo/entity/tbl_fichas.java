@@ -1,6 +1,5 @@
 package com.back.accesum.modelo.entity;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,8 +35,8 @@ public class tbl_fichas implements Serializable{
     @Column(name = "programa")
     private String programa;
     
-    @ManyToOne(cascade={CascadeType.MERGE, CascadeType.REMOVE})
-    @JoinColumn(name="tbl_fichas_tbl_coordinacions")
+    @ManyToOne(optional = false)
+    @JoinColumn(name="tbl_fichas_tbl_coordinacions", referencedColumnName = "id")
     private tbl_coordinacions tbl_fichas_tbl_coordinacions ;
 
 

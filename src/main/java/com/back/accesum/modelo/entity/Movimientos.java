@@ -1,6 +1,5 @@
 package com.back.accesum.modelo.entity;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,8 +24,8 @@ public class Movimientos {
     @Column(name = "id_mov")
     private Integer id;
     
-    @ManyToOne(cascade={CascadeType.MERGE, CascadeType.REMOVE})
-    @JoinColumn(name = "id_user")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_user", referencedColumnName = "id_user")
     private User id_user;
     
     @CreationTimestamp
@@ -38,8 +37,8 @@ public class Movimientos {
     @CreationTimestamp
     private LocalTime Hora_salida;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "sede_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "sede_id", referencedColumnName = "id_sedes")
     private Sedes id_sedes;
     
 

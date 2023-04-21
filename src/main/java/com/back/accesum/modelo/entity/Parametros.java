@@ -1,9 +1,6 @@
 package com.back.accesum.modelo.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.CascadeType;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,19 +22,16 @@ public class Parametros {
     @Column(name = "id_parametros")
     private Long id;
 
-    @ManyToOne(cascade={CascadeType.MERGE, CascadeType.REMOVE})
-    @JoinColumn(name = "id_sedes")
-    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_sedes", referencedColumnName = "id")
     private Sedes id_sedes;
 
-    @ManyToOne(cascade={CascadeType.MERGE, CascadeType.REMOVE})
-    @JoinColumn(name = "id_user")
-    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_user", referencedColumnName = "id")
     private User id_user;
 
-    @ManyToOne(cascade={CascadeType.MERGE, CascadeType.REMOVE})
-    @JoinColumn(name = "id_rol")
-    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_rol", referencedColumnName = "id")
     private Rol id_rol;
 
 

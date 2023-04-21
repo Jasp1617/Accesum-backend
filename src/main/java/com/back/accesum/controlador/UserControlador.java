@@ -143,6 +143,7 @@ public class UserControlador {
                         userActual.setPassword(user.getPassword());
                         userActual.setTbl_fichas(user.getTbl_fichas());
                         userActual.setDetalles(user.getDetalles());
+                        userActual.setRol_id(user.getRol_id());
 
                         userUpdated = userService.save(userActual);
 

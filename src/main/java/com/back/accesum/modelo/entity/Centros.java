@@ -1,6 +1,5 @@
 package com.back.accesum.modelo.entity;
 
-import jakarta.persistence.CascadeType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,8 +32,8 @@ public class Centros {
     @Column(name = "tbl_centros_nombre")
     private String tbl_centros_nombre;
 
-    @ManyToOne(cascade={CascadeType.MERGE, CascadeType.REMOVE})
-    @JoinColumn(name="tbl_centros_tbl_regionals_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name="tbl_centros_tbl_regionals_id", referencedColumnName = "id")
     private regionales tbl_centros_tbl_regionals_id;
 
 

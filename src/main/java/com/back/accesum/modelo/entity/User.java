@@ -1,7 +1,5 @@
 package com.back.accesum.modelo.entity;
 
-//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 
 import jakarta.persistence.Entity;
@@ -43,12 +41,12 @@ public class User implements Serializable{
     @Column(name = "detalles")
     private String detalles;
     
-    @ManyToOne(cascade={CascadeType.MERGE, CascadeType.REMOVE})
-    @JoinColumn(name="fichas_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name="fichas_id", referencedColumnName = "id")
     private tbl_fichas tbl_fichas;
 
-    @ManyToOne(cascade={CascadeType.MERGE, CascadeType.REMOVE})
-    @JoinColumn(name="rol_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name="rol_id", referencedColumnName = "id")
     private Rol rol_id;
     
 }

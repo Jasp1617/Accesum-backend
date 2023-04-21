@@ -11,8 +11,6 @@ import jakarta.persistence.Table;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.CascadeType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -39,9 +37,8 @@ public class tbl_coordinacions implements Serializable {
     @Column(name = "tbl_coordinacions_coordinador")
     private String tbl_coordinacions_coordinador;
 
-    @ManyToOne(cascade={CascadeType.MERGE, CascadeType.REMOVE})
-    @JoinColumn(name="tbl_coordinacions_tbl_centros_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne(optional = false)
+    @JoinColumn(name="tbl_coordinacions_tbl_centros_id", referencedColumnName = "id")
     private Centros tbl_coordinacions_tbl_centros_id;
 
     

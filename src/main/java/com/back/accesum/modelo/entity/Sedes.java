@@ -1,6 +1,5 @@
 package com.back.accesum.modelo.entity;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,12 +35,12 @@ public class Sedes {
     @Column(name = "sede_direccion")
     private String sede_direccion;
               
-    @ManyToOne(cascade={CascadeType.MERGE, CascadeType.REMOVE})
+    @ManyToOne(optional = false)
     @JoinColumn(name="sede_centros_id")
     private Centros sede_centros_id;  
     
-    @ManyToOne(cascade={CascadeType.MERGE, CascadeType.REMOVE})
-    @JoinColumn(name="sede_cordinacions")
+    @ManyToOne(optional = false)
+    @JoinColumn(name="sede_cordinacions", referencedColumnName = "id")
     private tbl_coordinacions sede_cordinacions;
     
     
