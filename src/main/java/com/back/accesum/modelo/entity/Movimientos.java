@@ -25,7 +25,7 @@ public class Movimientos {
     private Integer id;
     
     @ManyToOne(optional = false)
-    @JoinColumn(name = "id_user", referencedColumnName = "id_user")
+    @JoinColumn(name = "id_user", referencedColumnName = "user_id")
     private User id_user;
     
     @CreationTimestamp

@@ -23,11 +23,11 @@ public class Parametros {
     private Long id;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "id_sedes", referencedColumnName = "id")
+    @JoinColumn(name = "id_sedes", referencedColumnName = "id_sedes")
     private Sedes id_sedes;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "id_user", referencedColumnName = "id")
+    @JoinColumn(name = "id_user", referencedColumnName = "user_id")
     private User id_user;
 
     @ManyToOne(optional = false)
