@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonPropertyOrder({ "name", "document", "email", "detalles", "fichas_id" })
+@JsonPropertyOrder({ "name", "document", "email", "detalles", "fichas_id" ,"rol_id"})
 public class UserDTO {
 
     @NotBlank
@@ -33,4 +33,8 @@ public class UserDTO {
     @NotEmpty
     @JsonAlias("fichas_id")
     private Integer fichas_id;
+
+    @NotEmpty
+    @JsonAlias("rol_id")
+    private Integer rol_id;
 }

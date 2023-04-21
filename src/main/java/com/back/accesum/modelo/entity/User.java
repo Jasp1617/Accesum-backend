@@ -1,6 +1,6 @@
 package com.back.accesum.modelo.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 
@@ -47,6 +47,8 @@ public class User implements Serializable{
     @JoinColumn(name="fichas_id")
     private tbl_fichas tbl_fichas;
 
-
+    @ManyToOne(cascade={CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinColumn(name="rol_id")
+    private Rol rol_id;
     
 }

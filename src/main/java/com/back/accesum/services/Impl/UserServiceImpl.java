@@ -1,5 +1,6 @@
 package com.back.accesum.services.Impl;
 
+import com.back.accesum.modelo.entity.Rol;
 import com.back.accesum.modelo.entity.User;
 import com.back.accesum.services.IUserService;
 import com.back.accesum.modelo.entity.tbl_fichas;
@@ -58,9 +59,16 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
+	public List<Rol> findAllrRols() {
+		return userRepo.findAllrols();
+	}
+
+	@Override
 	public User findByUsername(String username) {
 		throw new UnsupportedOperationException("Not supported yet."); // Generated from
 																		// nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 	}
+
+
 
 }

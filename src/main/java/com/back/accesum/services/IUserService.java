@@ -1,5 +1,6 @@
 package com.back.accesum.services;
 
+import com.back.accesum.modelo.entity.Rol;
 import com.back.accesum.modelo.entity.User;
 import com.back.accesum.modelo.entity.tbl_fichas;
 import java.util.List;
@@ -23,6 +24,8 @@ public interface IUserService {
 	public void delete(Long id);
 	
 	public List<tbl_fichas> findAlltbl_fichas();
+
+	public List<Rol> findAllrRols();
         
         
 
