@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 11-04-2023 a las 18:52:37
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 21-04-2023 a las 16:50:21
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -48,13 +48,6 @@ CREATE TABLE `parametros` (
   `id_user` int(11) NOT NULL,
   `id_rol` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `parametros`
---
-
-INSERT INTO `parametros` (`id_parametros`, `id_sedes`, `id_user`, `id_rol`) VALUES
-(1, 1, 4, 7);
 
 -- --------------------------------------------------------
 
@@ -440,18 +433,9 @@ CREATE TABLE `user` (
   `email` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(100) NOT NULL,
   `detalles` varchar(225) DEFAULT NULL,
-  `fichas_id` bigint(20) UNSIGNED DEFAULT NULL
+  `fichas_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `rol_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `user`
---
-
-INSERT INTO `user` (`user_id`, `name`, `document`, `email`, `password`, `detalles`, `fichas_id`) VALUES
-(4, 'Jorge', 1047039410, 'jasp@gmail.com', '$2a$10$OCiJdEJmufIYa6XsZh8V5uYRlA8CAuaR..C0qWm0lLYgUyWC0LGNC', 'wef', 55),
-(6, 'Helmunt', 1047036740, 'Helmunt@gmail.com', '1047036740', 'wefxcf', 55),
-(7, 'Jordan', 1047036790, 'Jordan@gmail.com', '1047036790', 'wefxcf', 55),
-(9, 'Juancho', 1047039429, 'jugmail.com', '$2a$10$OCiJdEJmufIYa6XsZh8V5uYRlA8CAuaR..C0qWm0lLYgUyWC0LGNC', 'wef', 55);
 
 --
 -- Índices para tablas volcadas
@@ -522,7 +506,8 @@ ALTER TABLE `tbl_sedes`
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `email` (`email`),
-  ADD KEY `id_fichas` (`fichas_id`);
+  ADD KEY `id_fichas` (`fichas_id`),
+  ADD KEY `rol_id` (`rol_id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -630,7 +615,8 @@ ALTER TABLE `tbl_sedes`
 -- Filtros para la tabla `user`
 --
 ALTER TABLE `user`
-  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`fichas_id`) REFERENCES `tbl_fichas` (`id`);
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`fichas_id`) REFERENCES `tbl_fichas` (`id`),
+  ADD CONSTRAINT `user_ibfk_2` FOREIGN KEY (`rol_id`) REFERENCES `rol` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
