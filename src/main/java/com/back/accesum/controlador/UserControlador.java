@@ -130,7 +130,7 @@ public class UserControlador {
                 }
 
                 if (userActual == null) {
-                        response.put("mensaje", "Error: no se pudo editar, el cliente ID: "
+                        response.put("mensaje", "Error: no se pudo editar, el Usuario ID: "
                                         .concat(id.toString().concat(" no existe en la base de datos!")));
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
                 }

@@ -69,7 +69,7 @@ public class CoordinacionsControlador {
                 }
 
                 if (coordinacions == null) {
-                        response.put("mensaje", "El usuario ID: "
+                        response.put("mensaje", "Coordinacion ID: "
                                         .concat(id.toString().concat(" no existe en la base de datos!")));
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
                 }
@@ -104,7 +104,7 @@ public class CoordinacionsControlador {
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
                 }
 
-                response.put("mensaje", "El usuario ha sido creado con éxito!");
+                response.put("mensaje", "Coordinacion ha sido creado con éxito!");
                 response.put("usuario", coordinacionsNew);
                 return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
         }
@@ -132,7 +132,7 @@ public class CoordinacionsControlador {
                 }
 
                 if (coordinacionsActual == null) {
-                        response.put("mensaje", "Error: no se pudo editar, el cliente ID: "
+                        response.put("mensaje", "Error: no se pudo editar, coordinacion ID: "
                                         .concat(id.toString().concat(" no existe en la base de datos!")));
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
                 }
@@ -147,7 +147,7 @@ public class CoordinacionsControlador {
                         coordinacionsUpdated = coordinacionsService.save(coordinacionsActual);
 
                 } catch (DataAccessException e) {
-                        response.put("mensaje", "Error al actualizar el usuario en la base de datos");
+                        response.put("mensaje", "Error al actualizar coordinacions en la base de datos");
                         response.put("error",
                                         e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);

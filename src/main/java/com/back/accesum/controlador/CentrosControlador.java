@@ -134,7 +134,7 @@ public class CentrosControlador {
                 }
 
                 if (centrosActual == null) {
-                        response.put("mensaje", "Error: no se pudo editar, el cliente ID: "
+                        response.put("mensaje", "Error: no se pudo editar, el centro ID: "
                                         .concat(id.toString().concat(" no existe en la base de datos!")));
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
                 }
@@ -148,13 +148,13 @@ public class CentrosControlador {
                         centrosUpdated = centrosService.save(centrosActual);
 
                 } catch (DataAccessException e) {
-                        response.put("mensaje", "Error al actualizar el usuario en la base de datos");
+                        response.put("mensaje", "Error al actualizar el centro en la base de datos");
                         response.put("error",
                                         e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
                 }
 
-                response.put("mensaje", "centros ha sido actualizado con éxito!");
+                response.put("mensaje", "El centro ha sido actualizado con éxito!");
                 response.put("usuario", centrosUpdated);
 
                 return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
@@ -175,13 +175,13 @@ public class CentrosControlador {
 
                         centrosService.delete(id);
                 } catch (DataAccessException e) {
-                        response.put("mensaje", "Error al eliminar el centros de la base de datos");
+                        response.put("mensaje", "Error al eliminar el centro de la base de datos");
                         response.put("error",
                                         e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
                 }
 
-                response.put("mensaje", "el centros ha sido eliminado con éxito!");
+                response.put("mensaje", "El centro ha sido eliminado con éxito!");
 
                 return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
         }

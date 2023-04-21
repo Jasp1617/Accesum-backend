@@ -59,7 +59,7 @@ public class ParametrosControlador {
                 }
 
                 if (parametros == null) {
-                        response.put("mensaje", "El centro ID: "
+                        response.put("mensaje", "El parametro ID: "
                                         .concat(id.toString().concat(" no existe en la base de datos!")));
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
                 }
@@ -94,7 +94,7 @@ public class ParametrosControlador {
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
                 }
 
-                response.put("mensaje", "El parametros ha sido creado con éxito!");
+                response.put("mensaje", "El parametro ha sido creado con éxito!");
                 response.put("usuario", parametrosNew);
                 return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
         }
@@ -122,7 +122,7 @@ public class ParametrosControlador {
                 }
 
                 if (parametrosActual == null) {
-                        response.put("mensaje", "Error: no se pudo editar, el cliente ID: "
+                        response.put("mensaje", "Error: no se pudo editar, el parametro ID: "
                                         .concat(id.toString().concat(" no existe en la base de datos!")));
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
                 }
@@ -136,13 +136,13 @@ public class ParametrosControlador {
                         parametrosActual = parametrosService.save(parametrosActual);
 
                 } catch (DataAccessException e) {
-                        response.put("mensaje", "Error al actualizar el usuario en la base de datos");
+                        response.put("mensaje", "Error al actualizar el parametro en la base de datos");
                         response.put("error",
                                         e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
                 }
 
-                response.put("mensaje", "parametros ha sido actualizado con éxito!");
+                response.put("mensaje", "parametro ha sido actualizado con éxito!");
                 response.put("usuario", parametrosUpdated);
 
                 return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
@@ -163,13 +163,13 @@ public class ParametrosControlador {
 
                         parametrosService.delete(id);
                 } catch (DataAccessException e) {
-                        response.put("mensaje", "Error al eliminar el centros de la base de datos");
+                        response.put("mensaje", "Error al eliminar el parametro de la base de datos");
                         response.put("error",
                                         e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
                 }
 
-                response.put("mensaje", "el parametros ha sido eliminado con éxito!");
+                response.put("mensaje", "el parametro ha sido eliminado con éxito!");
 
                 return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
         }

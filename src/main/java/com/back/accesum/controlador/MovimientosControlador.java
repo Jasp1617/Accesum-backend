@@ -58,7 +58,7 @@ public class MovimientosControlador {
                 }
 
                 if (movimientos == null) {
-                        response.put("mensaje", "El usuario ID: "
+                        response.put("mensaje", "El movimiento ID: "
                                         .concat(id.toString().concat(" no existe en la base de datos!")));
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
                 }
@@ -136,13 +136,13 @@ public class MovimientosControlador {
                         movimientosUpdated = movServices.save(movimientoActual);
 
                 } catch (DataAccessException e) {
-                        response.put("mensaje", "Error al actualizar el usuario en la base de datos");
+                        response.put("mensaje", "Error al actualizar el movimiento en la base de datos");
                         response.put("error",
                                         e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
                 }
 
-                response.put("mensaje", "El usuario ha sido actualizado con éxito!");
+                response.put("mensaje", "El movimiento ha sido actualizado con éxito!");
                 response.put("usuario", movimientosUpdated);
 
                 return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
@@ -163,13 +163,13 @@ public class MovimientosControlador {
 
                         movServices.delete(id);
                 } catch (DataAccessException e) {
-                        response.put("mensaje", "Error al eliminar el usuario de la base de datos");
+                        response.put("mensaje", "Error al eliminar el movimiento de la base de datos");
                         response.put("error",
                                         e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
                 }
 
-                response.put("mensaje", "El usuario ha sido eliminado con éxito!");
+                response.put("mensaje", "El movimiento ha sido eliminado con éxito!");
 
                 return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
         }

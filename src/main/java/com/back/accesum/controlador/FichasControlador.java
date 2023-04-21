@@ -70,7 +70,7 @@ public class FichasControlador {
                 }
 
                 if (fichas == null) {
-                        response.put("mensaje", "El usuario ID: "
+                        response.put("mensaje", "La ficha ID: "
                                         .concat(id.toString().concat(" no existe en la base de datos!")));
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
                 }
@@ -105,7 +105,7 @@ public class FichasControlador {
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
                 }
 
-                response.put("mensaje", "El usuario ha sido creado con éxito!");
+                response.put("mensaje", "La ficha ha sido creado con éxito!");
                 response.put("usuario", fichasNew);
                 return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
         }
@@ -133,7 +133,7 @@ public class FichasControlador {
                 }
 
                 if (fichasActual == null) {
-                        response.put("mensaje", "Error: no se pudo editar, el cliente ID: "
+                        response.put("mensaje", "Error: no se pudo editar, la ficha ID: "
                                         .concat(id.toString().concat(" no existe en la base de datos!")));
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
                 }
@@ -148,13 +148,13 @@ public class FichasControlador {
                         fichasUpdated = fichasService.save(fichasActual);
 
                 } catch (DataAccessException e) {
-                        response.put("mensaje", "Error al actualizar el usuario en la base de datos");
+                        response.put("mensaje", "Error al actualizar la ficha en la base de datos");
                         response.put("error",
                                         e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
                         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
                 }
 
-                response.put("mensaje", "ficha ficha ha sido actualizado con éxito!");
+                response.put("mensaje", "ficha ha sido actualizado con éxito!");
                 response.put("usuario", fichasUpdated);
 
                 return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
